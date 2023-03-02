@@ -362,4 +362,38 @@ public class DataUtilitiesTest {
 			boolean outcome = DataUtilities.equal(originalArray, copy);
 			assertTrue("Copy should be the same as orginal", outcome);
 		}
+		
+		//non equal arrays negative
+		@Test
+		public void nonEqualsNeg() {
+			double[][] one = {{-1.1, 2.2}, {3.3, 4.4}};
+			double[][] two = {{1.1, 2.2}, {3.3, 4.4}};
+			boolean outcome = DataUtilities.equal(one, two);
+			assertFalse("no match", outcome);
+		}
+		
+		//both null arrays
+		@Test
+		public void NULLEquals() {
+			double[][] one = null;
+			double[][] two = null;
+			boolean outcome = DataUtilities.equal(one, two);
+			assertTrue("match", outcome);
+		}
+		//b = null
+		@Test
+		public void bNullEquals() {
+			double[][] one = {{1}, {2}};
+			double[][] two = null;
+			boolean outcome = DataUtilities.equal(one, two);
+			assertFalse("no match", outcome);
+		}
+		//different lengths
+		@Test
+		public void nonEqualLengths() {
+			double[][] one = {{1.1, 2.2}, {3.3, 4.4}};
+			double[][] two = new double[4][2];
+			boolean outcome = DataUtilities.equal(one, two);
+			assertFalse("no match", outcome);
+		}
 }
