@@ -134,18 +134,41 @@ public class DataUtilitiesTest {
 	     final Values2D values = mockingContext.mock(Values2D.class);
 	     mockingContext.checking(new Expectations() {
 	         {
-	             one(values).getColumnCount();
-	             will(returnValue(2));
+	             one(values).getRowCount();
+	             will(returnValue(3));
 	             one(values).getValue(0, 0); //row column
 	             will(returnValue(7.5));     //7.5 2.5
-	             one(values).getValue(0, 1); //only 7.5
+	             one(values).getValue(1, 0); //only 7.5
+	             will(returnValue(2.5));
+	             one(values).getValue(2, 0); 
+	             will(returnValue(1.0));
+	         }
+	     });
+	     int[] rows = {0,1,2};
+	     //double outcome = DataUtilities.calculateColumnTotal(values, 0, rows);
+	     //assertEquals(outcome, 10.0, .000000001d);
+	     assertEquals("Should return column total of 11.0", 11.0, DataUtilities.calculateColumnTotal(values, 0, rows), .000000001d);
+	 }
+	
+	
+	@Test
+	public void calculateColTotalWithNegRow() {
+	     // setup
+	     Mockery mockingContext = new Mockery();
+	     final Values2D values = mockingContext.mock(Values2D.class);
+	     mockingContext.checking(new Expectations() {
+	         {
+	             one(values).getRowCount();
+	             will(returnValue(-1));
+	             one(values).getValue(0, 0);
+	             will(returnValue(7.5));
+	             one(values).getValue(1, 0);
 	             will(returnValue(2.5));
 	         }
 	     });
-	     int[] rows = {1,2,3};
-	     double outcome = DataUtilities.calculateColumnTotal(values, 0, rows);
-	     assertEquals(outcome, 10.0, .000000001d);
-	 }
+
+	     assertEquals("Should return column total of 10.0", 10.0, DataUtilities.calculateColumnTotal(values, 0), .000000001d);
+	}
 	
 	// Tests calculateRowTotal() for two values in a row
 	 @Test
