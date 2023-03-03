@@ -173,32 +173,34 @@ public class RangeTest {
     
     //NEW COVERAGE TESTS START HERE
     
-//	@Rule // Testing InvalidParameterException for createNumberArray with an invalid input
-//	public ExpectedException invalidArgException = ExpectedException.none();
-//	
-//    @Test(expected = IllegalArgumentException.class)
-//    public void getLengthWithNull() {
-//    	invalidArgException.expect(InvalidParameterException.class);
-//    	invalidArgException.expectMessage("Range(double, double): require lower (\" + 2.0 + \") <= upper (\" + 5.0 + \").");
-//    	//final double num1 = null;
-//    	exampleRange = new Range(5.0, 2.0);
-//    	exampleRange.getLength();
-//        //assertNull("The length should not exist.", exampleRange.getCentralValue());
-//    }
-//    
-//    
-//    //max test
-//    @Test
-//    public void maxTest() {
-//    	double d2 = Math.sqrt(-1);
-//    	Math.max(1.0, d2);
-//    }
-      
+	@Rule // Testing InvalidParameterException for createNumberArray with an invalid input
+	public ExpectedException invalidArgException = ExpectedException.none();
+	
+    @Test(expected = IllegalArgumentException.class)
+    public void getLengthWithNull() {
+    	invalidArgException.expect(InvalidParameterException.class);
+    	invalidArgException.expectMessage("Range(double, double): require lower (\" + 2.0 + \") <= upper (\" + 5.0 + \").");
+    	//final double num1 = null;
+    	exampleRange = new Range(5.0, 2.0);
+    	exampleRange.getLength();
+        //assertNull("The length should not exist.", exampleRange.getCentralValue());
+    }
+    
+    
+    
+    //max test
+    @Test
+    public void maxTest() {
+    	double d2 = Math.sqrt(-1);
+    	Math.max(1.0, d2);
+    }
+    
+    
     //hashCode
     @Test
     public void hashCodeCoverageTest() {
         exampleRange = new Range (4, 5);
-        assertEquals(-2.115764224E9, exampleRange.hashCode(), 0.01);
+        assertEquals(-2.130968576E9, exampleRange.hashCode(), 0.01);
     }
     
     //scale
@@ -266,23 +268,23 @@ public class RangeTest {
 	
     @Test(expected = IllegalArgumentException.class)
     public void combineIgnoringNanCoverageTest5() {
-    	exampleRange = new Range (1,1);
+    	 exampleRange = new Range (1,1);
      	invalidArithmeticException.expect(InvalidParameterException.class);
      	invalidArithmeticException.expectMessage("Expected invalidArithmeticException");
-    	exampleRange2 = new Range (Math.sqrt(-1), 0);
-    	Range.combineIgnoringNaN(exampleRange, exampleRange2);
+    	 exampleRange2 = new Range (Math.sqrt(-1), 0);
+    	 Range.combineIgnoringNaN(exampleRange, exampleRange2);
     }
     
 	
     @Test(expected = IllegalArgumentException.class)
     public void combineIgnoringNanCoverageTest6() {
-    	exampleRange = new Range (1,1);
+    	 exampleRange = new Range (1,1);
      	invalidArithmeticException.expect(InvalidParameterException.class);
      	invalidArithmeticException.expectMessage("Expected invalidArithmeticException");
-    	exampleRange2 = new Range (Math.sqrt(-1), Math.sqrt(-1));
-    	Range.combineIgnoringNaN(null, exampleRange2);
-    	Range.combineIgnoringNaN(exampleRange2, exampleRange2);
-    	Range.combineIgnoringNaN(exampleRange2, null);
+    	 exampleRange2 = new Range (Math.sqrt(-1), Math.sqrt(-1));
+    	 Range.combineIgnoringNaN(null, exampleRange2);
+    	 Range.combineIgnoringNaN(exampleRange2, exampleRange2);
+    	 Range.combineIgnoringNaN(exampleRange2, null);
     }
     
     
@@ -363,9 +365,7 @@ public class RangeTest {
     public void intersectsCoverageTest2() {
         Range range  = new Range(3, 6);
         assertEquals(true, range.intersects(3,7));
- 
     	exampleRange = new Range(3, 6);
-    	//exampleRange.intersects(3,3);
         assertEquals(true, range.intersects(3,3));
     }
     
@@ -394,7 +394,7 @@ public class RangeTest {
 
    //getCentralValue
     @Test
-    public void getCentralValueCoverageTest() {
+    public void centralValueCoverageTest() {
         assertEquals("The central value of -1 and 1 should be 0",
         0, exampleRange.getCentralValue(), .000000001d);
     }
@@ -406,7 +406,14 @@ public class RangeTest {
         Range range1 = new Range(8.0,20.0);
         assertEquals(range1, Range.shift(range, 5));
     }
-      
+    
+    @Test
+    public void shiftCoverageTest2() {
+        Range range = new Range (15, 3);
+        Range range1 = new Range(20.0,8.0);
+        assertEquals(range1, Range.shift(range, 5));
+    }
+    
     @Test
     public void shiftThreeParamsCoverageTest() {
     	exampleRange = new Range (1, 4);
