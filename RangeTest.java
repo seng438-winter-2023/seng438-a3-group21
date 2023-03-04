@@ -173,7 +173,7 @@ public class RangeTest {
     
     //NEW COVERAGE TESTS START HERE
     
-	@Rule // Testing InvalidParameterException for createNumberArray with an invalid input
+	@Rule // Testing InvalidParameterException 
 	public ExpectedException invalidArgException = ExpectedException.none();
 	
     @Test(expected = IllegalArgumentException.class)
@@ -186,148 +186,145 @@ public class RangeTest {
         //assertNull("The length should not exist.", exampleRange.getCentralValue());
     }
     
-    
-    
     //max test
     @Test
     public void maxTest() {
     	double d2 = Math.sqrt(-1);
     	Math.max(1.0, d2);
     }
-    
-    
+        
     //hashCode
     @Test
     public void hashCodeCoverageTest() {
         exampleRange = new Range (4, 5);
-        assertEquals(-2.130968576E9, exampleRange.hashCode(), 0.01);
+        assertEquals(-2.130968576E9, exampleRange.hashCode(), 0.000000001d);
     }
     
     //scale
     @Test
     public void scaleCoverageTest1() {
     	exampleRange = new Range (0, 0);
-    	Range.scale(exampleRange, 7);
+    	Range.scale(exampleRange, 8);
     }
     
     @Test
     public void scaleCoverageTest2() {
-    	exampleRange = new Range (3, 5);
+    	exampleRange = new Range (4, 5);
     	Range.scale(exampleRange, -7);
     }
     
     //combine
     @Test
     public void combineCoverageTest() {
-    	exampleRange = new Range(6, 7);
+    	exampleRange = new Range(6, 8);
     	Range.combine(null, exampleRange);
-    	    }
+    }
     
     @Test
     public void combineCoverageTest2() {
-    	exampleRange = new Range(6, 7);
+    	exampleRange = new Range(6, 8);
     	Range.combine(exampleRange, null);
-    	    }
+    }
     
     @Test
     public void combineCoverageTest3() {
-    	exampleRange = new Range(6, 7);
-    	Range testRange = new Range (3,6);
+    	exampleRange = new Range(6, 8);
+    	Range testRange = new Range (4, 7);
     	Range.combine(exampleRange, testRange);
     }
         
-    //combineIgnorningNaN
+    //combineIgnoringNaN
     @Test
     public void combineIgnoringNaNCoverageTest() {
-    	exampleRange = new Range(1, 8);
+    	exampleRange = new Range(2, 6);
     	Range.combineIgnoringNaN(null, exampleRange);
     }
     
     @Test
     public void combineIgnoringNaNCoverageTest2() {
-    	exampleRange = new Range(1, 8);
+    	exampleRange = new Range(2, 6);
     	Range.combineIgnoringNaN(exampleRange, null);
     }
     
     @Test
     public void combineIgnoringNaNCoverageTest3() {
-    	exampleRange = new Range(1, 8);
+    	exampleRange = new Range(2, 6);
     	Range.combineIgnoringNaN(exampleRange, null);
     }
     
     @Test
     public void combineIgnoringNaNCoverageTest4() {
-    	exampleRange = new Range (3, 4);
+    	exampleRange = new Range (2, 4);
     	Range exampleRange2 = new Range(1, 8);
     	Range.combineIgnoringNaN(exampleRange2, exampleRange);
     }
     
     
-	@Rule // Testing InvalidParameterException for createNumberArray with an invalid input
+	@Rule // Testing InvalidParameterException
 	public ExpectedException invalidArithmeticException = ExpectedException.none();
 	
     @Test(expected = IllegalArgumentException.class)
     public void combineIgnoringNanCoverageTest5() {
-    	 exampleRange = new Range (1,1);
+    	exampleRange = new Range (1,1);
      	invalidArithmeticException.expect(InvalidParameterException.class);
      	invalidArithmeticException.expectMessage("Expected invalidArithmeticException");
-    	 exampleRange2 = new Range (Math.sqrt(-1), 0);
-    	 Range.combineIgnoringNaN(exampleRange, exampleRange2);
+    	exampleRange2 = new Range (Math.sqrt(-1), 0);
+    	Range.combineIgnoringNaN(exampleRange, exampleRange2);
     }
     
 	
     @Test(expected = IllegalArgumentException.class)
     public void combineIgnoringNanCoverageTest6() {
-    	 exampleRange = new Range (1,1);
+    	exampleRange = new Range (1,1);
      	invalidArithmeticException.expect(InvalidParameterException.class);
      	invalidArithmeticException.expectMessage("Expected invalidArithmeticException");
-    	 exampleRange2 = new Range (Math.sqrt(-1), Math.sqrt(-1));
-    	 Range.combineIgnoringNaN(null, exampleRange2);
-    	 Range.combineIgnoringNaN(exampleRange2, exampleRange2);
-    	 Range.combineIgnoringNaN(exampleRange2, null);
+    	exampleRange2 = new Range (Math.sqrt(-1), Math.sqrt(-1));
+    	Range.combineIgnoringNaN(null, exampleRange2);
+    	Range.combineIgnoringNaN(exampleRange2, exampleRange2);
+    	Range.combineIgnoringNaN(exampleRange2, null);
     }
     
     
     //equals
     @Test
     public void equalsCoverageTest1() {
-    	exampleRange = new Range (3, 5);
-    	Range testRange = new Range (3,5);
+    	exampleRange = new Range (4, 6);
+    	Range testRange = new Range (4, 6);
     	exampleRange.equals(testRange);
     }
     
     
     @Test
     public void equalsCoverageTest2() {
-    	exampleRange = new Range (3, 5);
-    	Range testRange = new Range (3,6);
+    	exampleRange = new Range (4, 6);
+    	Range testRange = new Range (4, 8);
     	exampleRange.equals(testRange);
     }
     
     @Test
     public void equalsCoverageTest3() {
-    	exampleRange = new Range (3, 5);
+    	exampleRange = new Range (4, 6);
     	exampleRange.equals(6);
     }
     
     @Test
     public void equalsCoverageTest4() {
-    	exampleRange = new Range (3, 5);
-    	Range testRange = new Range (4,5);
+    	exampleRange = new Range (4, 5);
+    	Range testRange = new Range (4, 6);
     	exampleRange.equals(testRange);
     }
     
     //expandToInclude
     @Test
     public void expandToIncludeCoverageTest1() {
-    	exampleRange = new Range (3, 4);
-    	Range.expandToInclude(exampleRange, 5);
+    	exampleRange = new Range (4, 5);
+    	Range.expandToInclude(exampleRange, 6);
     }
     
     @Test
     public void expandToIncludeCoverageTest2() {
-    	exampleRange = new Range (3, 5);
-    	Range.expandToInclude(exampleRange, 4);
+    	exampleRange = new Range (4, 6);
+    	Range.expandToInclude(exampleRange, 5);
     }
     
     @Test
@@ -339,83 +336,82 @@ public class RangeTest {
     @Test
     public void expandToIncludeCoverageTest4() {
     	exampleRange = null;
-    	Range.expandToInclude(exampleRange, 2);
+    	Range.expandToInclude(exampleRange, 1);
     }
         
     //expand
     @Test
     public void expandCoverageTest1() {
-    	exampleRange = new Range (3, 5);
+    	exampleRange = new Range (4, 6);
     	Range.expand(exampleRange, 2, 7);
     }
     
     @Test
     public void expandCoverageTest2() {
-    	exampleRange = new Range (3, 5);
-    	Range.expand(exampleRange, 1, -4);
+    	exampleRange = new Range (4, 6);
+    	Range.expand(exampleRange, 2, -4);
     }
     
     //intersects
     @Test
     public void intersectsCoverageTest1() {
-    	exampleRange = new Range(3, 6);
-    	exampleRange.intersects(3,7);
+    	exampleRange = new Range(4, 6);
+    	exampleRange.intersects(4, 7);
    }
     @Test
     public void intersectsCoverageTest2() {
-        Range range  = new Range(3, 6);
-        assertEquals(true, range.intersects(3,7));
-    	exampleRange = new Range(3, 6);
-        assertEquals(true, range.intersects(3,3));
+        Range range  = new Range(4, 6);
+        assertEquals(true, range.intersects(4, 7));
+    	exampleRange = new Range(4, 6);
+        assertEquals(true, range.intersects(4, 3));
     }
     
     @Test
     public void intersectsCoverageTest3() {
-    	exampleRange = new Range(3, 6);
-    	exampleRange.intersects(5,6);
+    	exampleRange = new Range(4, 6);
+    	exampleRange.intersects(5, 6);
     }
   
     
     @Test
     public void intersectsCoverageTest4() {
-    	exampleRange = new Range(3, 6);
-    	Range testRange = new Range(1,5);
+    	exampleRange = new Range(4, 6);
+    	Range testRange = new Range(1, 5);
     	exampleRange.intersects(testRange);
-    	    }
+    }
     
     
     //toString
    @Test
    public void toStringCoverageTest() {
-       exampleRange = new Range (1, 5);
-       assertEquals(exampleRange.toString(), "Range[1.0,5.0]");
+       exampleRange = new Range (4, 6);
+       assertEquals(exampleRange.toString(), "Range[4.0,6.0]");
    }
     
 
    //getCentralValue
     @Test
     public void centralValueCoverageTest() {
-        assertEquals("The central value of -1 and 1 should be 0",
-        0, exampleRange.getCentralValue(), .000000001d);
+        assertEquals("The central value of -1 and 1 should be 0", 0, exampleRange.getCentralValue(), .000000001d);
     }
  
     //shift
     @Test
     public void shiftCoverageTest1() {
-        Range range = new Range (3, 15);
-        Range range1 = new Range(8.0,20.0);
+        Range range = new Range (5, 15);
+        Range range1 = new Range(12.0, 30.0);
         assertEquals(range1, Range.shift(range, 5));
     }
     
     @Test
     public void shiftCoverageTest2() {
-        Range range = new Range (15, 3);
-        Range range1 = new Range(20.0,8.0);
-        assertEquals(range1, Range.shift(range, 5));
+        Range range = new Range (15, 5);
+        Range range1 = new Range(20.0, 8.0);
+        assertEquals(range1, Range.shift(range, 6));
     }
     
     @Test
-    public void shiftThreeParamsCoverageTest() {
+    public void shiftCoverageTest3() {
     	exampleRange = new Range (1, 4);
     	Range.shift(exampleRange, 4, true);
     }
